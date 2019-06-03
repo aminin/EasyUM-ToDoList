@@ -72,7 +72,7 @@ function getActiveList(){
 }
 
 function saveApp(){
-    localStorage.setItem('cardList', cardList);
+    //localStorage.setItem('cardList', cardList);
 }
 
 function render() {
@@ -192,4 +192,9 @@ $( document ).ready(function(){
         render();
    })
 
+
+    $.get('http://localhost:3000/boards', function(data) {
+        boardList = data;
+        render();
+    });
 });
