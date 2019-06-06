@@ -27,14 +27,22 @@ app.get('/boards', (req, res, next) => {
     res.json(boardsData);
 });
 
-// Создать доску
-app.post('/boards', (req, res, next) => {
+// Обновить доску
+app.post('/boards/:id', (req, res, next) => {
+    res.json('Реализуй меня');
+});
+
+// Удалить доску
+app.delete('/boards/:id', (req, res, next) => {
     res.json('Реализуй меня');
 });
 
 // Создать доску
 app.post('/boards', (req, res, next) => {
-    res.json('Реализуй меня');
+    console.log(req.json);
+    console.log(req.body)
+    res.json(req.body)
+    //res.json('Реализуй меня');
 });
 
 // Инфо о доске
