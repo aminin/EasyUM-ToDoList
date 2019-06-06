@@ -2,34 +2,28 @@
 
 ## Доски 
 
-### Создать доску
+### Создание доски
 
 ```
-POST    /boards
+POST /boards
 ```
 
 ### Список досок
 
 ```
-GET     /boards
+GET /boards
 ```
 
-### Инфо о доске
+### Информация о доске
 
 ```
-GET     /boards/:id
+GET /boards/:id
 ```
 
 ### Удаление доски
 
 ```
-DELETE  /boards/:id
-```
-
-### Список карточек доски
-
-```
-/boards/:id/cards
+DELETE /boards/:id
 ```
 
 ## Карточки 
@@ -37,23 +31,23 @@ DELETE  /boards/:id
 ### Создание карточек
 
 ```
-POST    /boards/:id/cards
+POST /boards/:board_id/cards
 ```
 
 ### Список карточек доски
 
 ```
-/boards/:id/cards
+GET  /boards/:board_id/cards
 ```
 
 ### Инфо о карточке
 
 ```
-GET /boards/:id/cards/:id
+GET /boards/:board_id/cards/:id
 ```
 
 ### Удаление карточки
 
 ```
-DELETE /boards/:id/cards/:id
+DELETE /boards/:board_id/cards/:id
 ```
