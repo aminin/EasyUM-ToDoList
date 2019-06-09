@@ -20,6 +20,8 @@ app.listen(3000, () => {
 
 // Главную страницу по адресу http://localhost:3000/
 app.use(express.static('.'));
+app.use(express.urlencoded());
+app.use(express.json());
 
 app.get('/boards', (req, res, next) => {
     let boardsData = JSON.parse(fs.readFileSync(boardsFileName).toString());
@@ -39,10 +41,9 @@ app.delete('/boards/:id', (req, res, next) => {
 
 // Создать доску
 app.post('/boards', (req, res, next) => {
-    console.log(req.json);
-    console.log(req.body)
-    res.json(req.body)
-    //res.json('Реализуй меня');
+    console.log(req.body);
+    fs.writeFileSync(boardsFileName, JSON.stringify(req.body));
+    res.json('Данные сохранены');
 });
 
 // Инфо о доске

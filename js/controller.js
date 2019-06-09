@@ -4,9 +4,18 @@ class BoardController {
         this.view = view;
     }
 
-    dislplay() {
-        data = this.model.loadData();
-        data = this.model.loadData();
+    display() {
+        this.model.on('load_complete', () => {
+            this.view.data = this.model.collection.models;
+            this.view.render();
+        });
+        this.model.load();
+    }
+
+    createBoard(name) {
+        this.model.collection.add(this.model.collection.create({name: name}));
+        this.model.save();
+        this.view.render();
     }
 }
 
@@ -19,8 +28,7 @@ function getBoards() {
 }
 
 function createBoard(name, id) {
-    boardList.push(new Board(name, boardList.length));
-    saveApp();
+    boardList.push(new BoardModel(name, boardList.length));
     render();
 }
 
@@ -28,7 +36,7 @@ function createCard(name, description, board) {
     if (board === undefined) {
         board = 0;
     }
-    cardList.push(new Card(name, description, board));
+    cardList.push(new CardModel(name, description, board));
     getBoards();
     saveApp();
     render();
@@ -37,15 +45,4 @@ function createCard(name, description, board) {
 function getActiveList() {
     activeCardList = cardList.filter(n => n.deleted == false);
     archiveList = cardList.filter(n => n.deleted == true);
-}
-
-function saveApp() {
-    $.ajax({
-        type: "POST",
-        url: 'http://localhost:3000/boards',
-        data: JSON.stringify(boardList),
-        contentType: 'application/json',
-        dataType: 'json'
-    });
-    console.log(JSON.stringify(cardList));
 }

@@ -55,11 +55,10 @@ $(document).ready(function () {
         render();
     });
 
-
-    $.get('http://localhost:3000/boards', function (data) {
-        boardList = data;
-        render();
-    });
-    let boardController = new BoardController(new BoardModel(), new BoardView());
+    let boardController = new BoardController(BoardModel, new BoardView($));
     boardController.display();
+
+    function createBoard(name) {
+        boardController.createBoard(name);
+    }
 });
